@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookRequest;
+use App\Mail\BookRequestFulfilled;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookRequestController extends Controller
 {
@@ -43,8 +45,11 @@ class BookRequestController extends Controller
 
     public function fulfill($id)
     {
-        $request = BookRequest::findOrFail($id);
-        $request->update(['status' => 'fulfilled']);
-        return back()->with('success', 'Request marked as fulfilled!');
+        $bookRequest = BookRequest::with('user')->findOrFail($id);
+        $bookRequest->update(['status' => 'fulfilled']);
+
+        Mail::to($bookRequest->user->email)->send(new BookRequestFulfilled($bookRequest));
+
+        return back()->with('success', 'Request fulfilled and email sent to user!');
     }
 }
