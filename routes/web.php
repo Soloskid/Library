@@ -11,12 +11,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [SavedBookController::class, 'index'])
-    ->middleware(['auth', 'verified'])->name('dashboard');
+    ->middleware(['auth'])->name('dashboard');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::post('/save/{id}', [SavedBookController::class, 'save'])->name('books.save');
     Route::delete('/unsave/{id}', [SavedBookController::class, 'unsave'])->name('books.unsave');
     Route::get('/requests', [BookRequestController::class, 'index'])->name('requests.index');
