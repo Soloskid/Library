@@ -179,7 +179,7 @@
                     </form>
 
                     @if($book->file_path)
-                    <a href="{{ $book->file_path }}" class="btn btn-download" target="_blank">
+                    <a href="{{ str_replace('/upload/', '/upload/fl_attachment/', $book->file_path) }}" class="btn btn-download" download>
                         <i class="fas fa-download"></i> Download PDF
                     </a>
                     @endif
