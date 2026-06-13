@@ -53,7 +53,9 @@ class AdminController extends Controller
                 env('CLOUDINARY_API_KEY'),
                 env('CLOUDINARY_API_SECRET')
             )->attach('file', file_get_contents($file), $file->getClientOriginalName())
-            ->post('https://api.cloudinary.com/v1_1/'.env('CLOUDINARY_CLOUD_NAME').'/auto/upload');
+            ->post('https://api.cloudinary.com/v1_1/'.env('CLOUDINARY_CLOUD_NAME').'/raw/upload', [
+                'resource_type' => 'raw'
+            ]);
             
             if($response->successful()) {
                 $book->file_path = $response->json()['secure_url'];
