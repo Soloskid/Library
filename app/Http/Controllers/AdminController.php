@@ -35,19 +35,13 @@ class AdminController extends Controller
         $book->description = $request->description;
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
-        $apiKey = env('CLOUDINARY_API_KEY');
-        $apiSecret = env('CLOUDINARY_API_SECRET');
 
         if ($request->hasFile('cover_image')) {
             $file = $request->file('cover_image');
-            $timestamp = time();
-            $signature = sha1('timestamp='.$timestamp.$apiSecret);
 
             $response = Http::attach('file', file_get_contents($file), $file->getClientOriginalName())
             ->post('https://api.cloudinary.com/v1_1/'.$cloudName.'/image/upload', [
-                'api_key' => $apiKey,
-                'timestamp' => $timestamp,
-                'signature' => $signature,
+                'upload_preset' => 'library_preset',
             ]);
 
             if($response->successful()) {
@@ -57,14 +51,10 @@ class AdminController extends Controller
 
         if ($request->hasFile('file_path')) {
             $file = $request->file('file_path');
-            $timestamp = time();
-            $signature = sha1('timestamp='.$timestamp.$apiSecret);
 
             $response = Http::attach('file', file_get_contents($file), $file->getClientOriginalName())
-            ->post('https://api.cloudinary.com/v1_1/'.$cloudName.'/raw/upload', [
-                'api_key' => $apiKey,
-                'timestamp' => $timestamp,
-                'signature' => $signature,
+            ->post('https://api.cloudinary.com/v1_1/'.$cloudName.'/image/upload', [
+                'upload_preset' => 'library_preset',
             ]);
 
             if($response->successful()) {
