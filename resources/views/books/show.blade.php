@@ -133,7 +133,7 @@
     <div class="row">
         <!-- Book Cover -->
         <div class="col-md-4 mb-4">
-            <img src="{{ $book->cover_image ? asset('storage/'.$book->cover_image) : 'https://via.placeholder.com/300x400?text=No+Cover' }}" class="book-cover" alt="{{ $book->title }}">
+            <img src="{{ $book->cover_image ? $book->cover_image : 'https://via.placeholder.com/300x400?text=No+Cover' }}" class="book-cover" alt="{{ $book->title }}">
         </div>
 
         <!-- Book Info -->
@@ -179,7 +179,7 @@
                     </form>
 
                     @if($book->file_path)
-                    <a href="{{ asset('storage/'.$book->file_path) }}" class="btn btn-download" download>
+                    <a href="{{ $book->file_path }}" class="btn btn-download" target="_blank">
                         <i class="fas fa-download"></i> Download PDF
                     </a>
                     @endif

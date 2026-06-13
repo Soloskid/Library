@@ -166,7 +166,7 @@
         @forelse($books as $book)
         <div class="col-md-3 mb-4 book-card" data-title="{{ strtolower($book->title) }}" data-author="{{ strtolower($book->author) }}" data-category="{{ $book->category }}">
             <div class="card h-100">
-                <img src="{{ $book->cover_image ? asset('storage/'.$book->cover_image) : 'https://via.placeholder.com/200x300?text=No+Cover' }}" class="card-img-top" alt="{{ $book->title }}">
+                <img src="{{ $book->cover_image ? $book->cover_image : 'https://via.placeholder.com/200x300?text=No+Cover' }}" class="card-img-top" alt="{{ $book->title }}">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">{{ $book->title }}</h5>
                     <p class="card-text text-muted"><i class="fas fa-user"></i> {{ $book->author }}</p>
@@ -208,7 +208,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Search functionality
     document.getElementById('searchInput').addEventListener('keyup', filterBooks);
     document.getElementById('categoryFilter').addEventListener('change', filterBooks);
 

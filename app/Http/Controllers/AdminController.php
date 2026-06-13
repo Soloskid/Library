@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class AdminController extends Controller
 {
@@ -34,11 +35,18 @@ class AdminController extends Controller
         $book->description = $request->description;
 
         if ($request->hasFile('cover_image')) {
-            $book->cover_image = $request->file('cover_image')->store('covers', 'public');
+            $uploadedFile = Cloudinary::upload($request->file('cover_image')->getRealPath(), [
+                'folder' => 'library/covers'
+            ]);
+            $book->cover_image = $uploadedFile->getSecurePath();
         }
 
         if ($request->hasFile('file_path')) {
-            $book->file_path = $request->file('file_path')->store('books', 'public');
+            $uploadedFile = Cloudinary::uploadFile($request->file('file_path')->getRealPath(), [
+                'folder' => 'library/books',
+                'resource_type' => 'raw'
+            ]);
+            $book->file_path = $uploadedFile->getSecurePath();
         }
 
         $book->save();

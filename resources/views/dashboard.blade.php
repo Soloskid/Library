@@ -169,7 +169,7 @@
         @forelse($savedBooks as $saved)
         <div class="col-md-3 mb-4">
             <div class="card h-100">
-                <img src="{{ $saved->book->cover_image ? asset('storage/'.$saved->book->cover_image) : 'https://via.placeholder.com/200x300?text=No+Cover' }}" class="card-img-top" alt="{{ $saved->book->title }}">
+                <img src="{{ $saved->book->cover_image ? $saved->book->cover_image : 'https://via.placeholder.com/200x300?text=No+Cover' }}" class="card-img-top" alt="{{ $saved->book->title }}">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">{{ $saved->book->title }}</h5>
                     <p class="card-text text-muted"><i class="fas fa-user"></i> {{ $saved->book->author }}</p>

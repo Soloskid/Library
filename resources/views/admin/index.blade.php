@@ -163,7 +163,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                            <img src="{{ $book->cover_image ? asset('storage/'.$book->cover_image) : 'https://via.placeholder.com/50x70?text=No+Cover' }}" width="50" height="70" style="object-fit:cover; border-radius:5px;">
+                            <img src="{{ $book->cover_image ? $book->cover_image : 'https://via.placeholder.com/50x70?text=No+Cover' }}" width="50" height="70" style="object-fit:cover; border-radius:5px;">
                         </td>
                         <td class="fw-bold">{{ $book->title }}</td>
                         <td>{{ $book->author }}</td>
