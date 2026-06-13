@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -35,18 +35,29 @@ class AdminController extends Controller
         $book->description = $request->description;
 
         if ($request->hasFile('cover_image')) {
-            $uploadedFile = Cloudinary::upload($request->file('cover_image')->getRealPath(), [
-                'folder' => 'library/covers'
-            ]);
-            $book->cover_image = $uploadedFile->getSecurePath();
+            $file = $request->file('cover_image');
+            $response = Http::withBasicAuth(
+                env('CLOUDINARY_API_KEY'),
+                env('CLOUDINARY_API_SECRET')
+            )->attach('file', file_get_contents($file), $file->getClientOriginalName())
+            ->post('https://api.cloudinary.com/v1_1/'.env('CLOUDINARY_CLOUD_NAME').'/image/upload');
+            
+            if($response->successful()) {
+                $book->cover_image = $response->json()['secure_url'];
+            }
         }
 
         if ($request->hasFile('file_path')) {
-            $uploadedFile = Cloudinary::uploadFile($request->file('file_path')->getRealPath(), [
-                'folder' => 'library/books',
-                'resource_type' => 'raw'
-            ]);
-            $book->file_path = $uploadedFile->getSecurePath();
+            $file = $request->file('file_path');
+            $response = Http::withBasicAuth(
+                env('CLOUDINARY_API_KEY'),
+                env('CLOUDINARY_API_SECRET')
+            )->attach('file', file_get_contents($file), $file->getClientOriginalName())
+            ->post('https://api.cloudinary.com/v1_1/'.env('CLOUDINARY_CLOUD_NAME').'/raw/upload');
+            
+            if($response->successful()) {
+                $book->file_path = $response->json()['secure_url'];
+            }
         }
 
         $book->save();
