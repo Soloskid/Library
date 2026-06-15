@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SavedBookController;
 use App\Http\Controllers\BookRequestController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/requests', [BookRequestController::class, 'index'])->name('requests.index');
     Route::get('/requests/create', [BookRequestController::class, 'create'])->name('requests.create');
     Route::post('/requests', [BookRequestController::class, 'store'])->name('requests.store');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
