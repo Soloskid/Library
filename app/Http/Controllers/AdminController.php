@@ -33,6 +33,7 @@ class AdminController extends Controller
         $book->author = $request->author;
         $book->category = $request->category;
         $book->description = $request->description;
+        $book->file_path = $request->file_path;
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
 
@@ -46,19 +47,6 @@ class AdminController extends Controller
 
             if($response->successful()) {
                 $book->cover_image = $response->json()['secure_url'];
-            }
-        }
-
-        if ($request->hasFile('file_path')) {
-            $file = $request->file('file_path');
-
-            $response = Http::attach('file', file_get_contents($file), $file->getClientOriginalName())
-            ->post('https://api.cloudinary.com/v1_1/'.$cloudName.'/image/upload', [
-                'upload_preset' => 'library_preset',
-            ]);
-
-            if($response->successful()) {
-                $book->file_path = $response->json()['secure_url'];
             }
         }
 
