@@ -210,11 +210,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+            <ul class="navbar-nav ms-auto align-items-center flex-nowrap">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 <li class="nav-item"><a class="nav-link active" href="/dashboard" style="color:#f0c040 !important;">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="/requests">My Requests</a></li>
+                <li class="nav-item"><a class="nav-link" href="/requests">Requests</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
                 <li class="nav-item ms-2">
                     <form method="POST" action="/logout">
