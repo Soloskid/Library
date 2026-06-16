@@ -63,10 +63,15 @@
             border-radius: 16px;
             padding: 30px;
             transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            color: #fff;
         }
         .stat-card:hover {
-            border-color: rgba(240,192,64,0.15);
+            border-color: rgba(240,192,64,0.3);
             transform: translateY(-3px);
+            background: rgba(240,192,64,0.03);
+            color: #fff;
         }
         .stat-icon {
             width: 50px;
@@ -210,6 +215,7 @@
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 <li class="nav-item"><a class="nav-link active" href="/dashboard" style="color:#f0c040 !important;">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="/requests">My Requests</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
                 <li class="nav-item ms-2">
                     <form method="POST" action="/logout">
                         @csrf
@@ -245,25 +251,25 @@
         <!-- Stats -->
         <div class="row g-4 mb-5">
             <div class="col-md-4">
-                <div class="stat-card">
+                <a href="#saved-books" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
                     <div class="stat-number">{{ $savedBooks->count() }}</div>
                     <div class="stat-label">Saved Books</div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="stat-card">
+                <a href="/profile" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-user"></i></div>
                     <div class="stat-number" style="font-size:1.2rem; margin-top:8px;">{{ auth()->user()->name }}</div>
-                    <div class="stat-label">Your Account</div>
-                </div>
+                    <div class="stat-label">Your Account → Click to edit</div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="stat-number" style="font-size:0.9rem; margin-top:8px;">{{ auth()->user()->email }}</div>
-                    <div class="stat-label">Email Address</div>
-                </div>
+                <a href="/requests" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-list"></i></div>
+                    <div class="stat-number" style="font-size:1.2rem; margin-top:8px;">My Requests</div>
+                    <div class="stat-label">View all your book requests</div>
+                </a>
             </div>
         </div>
 
@@ -275,44 +281,46 @@
         @endif
 
         <!-- Saved Books -->
-        <div class="section-title"><i class="fas fa-bookmark me-2" style="color:#f0c040;"></i>My Saved Books</div>
+        <div id="saved-books">
+            <div class="section-title"><i class="fas fa-bookmark me-2" style="color:#f0c040;"></i>My Saved Books</div>
 
-        <div class="row g-4">
-            @forelse($savedBooks as $saved)
-            <div class="col-md-3">
-                <div class="book-card">
-                    <img src="{{ $saved->book->cover_image ? $saved->book->cover_image : 'https://via.placeholder.com/300x200/0d0d15/f0c040?text='.urlencode($saved->book->title) }}" alt="{{ $saved->book->title }}">
-                    <div class="book-card-body">
-                        <div class="book-category">{{ $saved->book->category }}</div>
-                        <div class="book-title">{{ $saved->book->title }}</div>
-                        <div class="book-author"><i class="fas fa-user me-1"></i>{{ $saved->book->author }}</div>
-                        <div class="d-flex gap-2">
-                            <a href="/books/{{ $saved->book->id }}" class="btn-view">
-                                <i class="fas fa-eye me-1"></i>View
-                            </a>
-                            <form method="POST" action="/unsave/{{ $saved->book->id }}">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn-remove">
-                                    <i class="fas fa-trash me-1"></i>Remove
-                                </button>
-                            </form>
+            <div class="row g-4">
+                @forelse($savedBooks as $saved)
+                <div class="col-md-3">
+                    <div class="book-card">
+                        <img src="{{ $saved->book->cover_image ? $saved->book->cover_image : 'https://via.placeholder.com/300x200/0d0d15/f0c040?text='.urlencode($saved->book->title) }}" alt="{{ $saved->book->title }}">
+                        <div class="book-card-body">
+                            <div class="book-category">{{ $saved->book->category }}</div>
+                            <div class="book-title">{{ $saved->book->title }}</div>
+                            <div class="book-author"><i class="fas fa-user me-1"></i>{{ $saved->book->author }}</div>
+                            <div class="d-flex gap-2">
+                                <a href="/books/{{ $saved->book->id }}" class="btn-view">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </a>
+                                <form method="POST" action="/unsave/{{ $saved->book->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn-remove">
+                                        <i class="fas fa-trash me-1"></i>Remove
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @empty
-            <div class="col-12">
-                <div class="empty-state">
-                    <i class="fas fa-bookmark"></i>
-                    <h4>No saved books yet</h4>
-                    <p>Start saving books to see them here</p>
-                    <a href="/books" class="btn-browse">
-                        <i class="fas fa-search me-2"></i>Browse Books
-                    </a>
+                @empty
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <h4>No saved books yet</h4>
+                        <p>Start saving books to see them here</p>
+                        <a href="/books" class="btn-browse">
+                            <i class="fas fa-search me-2"></i>Browse Books
+                        </a>
+                    </div>
                 </div>
+                @endforelse
             </div>
-            @endforelse
         </div>
     </div>
 </div>
