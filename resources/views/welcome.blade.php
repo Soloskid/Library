@@ -413,11 +413,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/" style="color:#f0c040 !important;">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/books">Books</a></li>
                 @auth
                     <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/requests">My Requests</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/requests">Requests</a></li>
                     <li class="nav-item ms-2">
                         <form method="POST" action="/logout">
                             @csrf
@@ -500,7 +500,14 @@
         <div class="marquee-item"><i class="fas fa-cogs"></i> Engineering</div>
         <div class="marquee-item"><i class="fas fa-heartbeat"></i> Medicine</div>
         <div class="marquee-item"><i class="fas fa-balance-scale"></i> Law</div>
+        <div class="marquee-item"><i class="fas fa-chart-line"></i> Accounting</div>
+        <div class="marquee-item"><i class="fas fa-briefcase"></i> Business</div>
+        <div class="marquee-item"><i class="fas fa-coins"></i> Finance</div>
         <div class="marquee-item"><i class="fas fa-palette"></i> Arts</div>
+        <div class="marquee-item"><i class="fas fa-store"></i> Commerce</div>
+        <div class="marquee-item"><i class="fas fa-bullhorn"></i> Marketing</div>
+        <div class="marquee-item"><i class="fas fa-brain"></i> Psychology</div>
+        <div class="marquee-item"><i class="fas fa-graduation-cap"></i> Education</div>
         <div class="marquee-item"><i class="fas fa-book"></i> Fiction</div>
         <div class="marquee-item"><i class="fas fa-flask"></i> Science</div>
         <div class="marquee-item"><i class="fas fa-laptop-code"></i> Technology</div>
@@ -509,7 +516,14 @@
         <div class="marquee-item"><i class="fas fa-cogs"></i> Engineering</div>
         <div class="marquee-item"><i class="fas fa-heartbeat"></i> Medicine</div>
         <div class="marquee-item"><i class="fas fa-balance-scale"></i> Law</div>
+        <div class="marquee-item"><i class="fas fa-chart-line"></i> Accounting</div>
+        <div class="marquee-item"><i class="fas fa-briefcase"></i> Business</div>
+        <div class="marquee-item"><i class="fas fa-coins"></i> Finance</div>
         <div class="marquee-item"><i class="fas fa-palette"></i> Arts</div>
+        <div class="marquee-item"><i class="fas fa-store"></i> Commerce</div>
+        <div class="marquee-item"><i class="fas fa-bullhorn"></i> Marketing</div>
+        <div class="marquee-item"><i class="fas fa-brain"></i> Psychology</div>
+        <div class="marquee-item"><i class="fas fa-graduation-cap"></i> Education</div>
     </div>
 </div>
 
@@ -674,6 +688,11 @@
             <div class="col-md-4 mb-4">
                 <div class="footer-brand"><i class="fas fa-book-open me-2"></i>Osaro's Library</div>
                 <p class="footer-desc">Your premium digital library for books, research papers and academic materials.</p>
+                <div class="mt-3">
+                    <a href="mailto:solomonosaro23@gmail.com" style="color:#f0c040; text-decoration:none; font-size:0.9rem;">
+                        <i class="fas fa-envelope me-2"></i>solomonosaro23@gmail.com
+                    </a>
+                </div>
             </div>
             <div class="col-md-2 mb-4">
                 <div class="footer-links">
@@ -697,6 +716,9 @@
                     <a href="/books">Fiction & Non-Fiction</a>
                     <a href="/books">Science & Technology</a>
                     <a href="/books">Law & Medicine</a>
+                    <a href="/books">Business & Finance</a>
+                    <a href="/books">Accounting & Commerce</a>
+                    <a href="/books">Arts & Psychology</a>
                 </div>
             </div>
         </div>
