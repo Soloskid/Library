@@ -195,6 +195,16 @@
                                 <option value="Medicine">Medicine</option>
                                 <option value="Law">Law</option>
                                 <option value="Arts">Arts</option>
+                                <option value="Accounting">Accounting</option>
+                                <option value="Business">Business</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Psychology">Psychology</option>
+                                <option value="Education">Education</option>
+                                <option value="Religion">Religion</option>
+                                <option value="Agriculture">Agriculture</option>
                             </select>
                         </div>
 
