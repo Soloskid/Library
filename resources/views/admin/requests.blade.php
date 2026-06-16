@@ -47,7 +47,7 @@
         .page-subtitle { color: #666; margin-top: 8px; }
         .main-content { padding: 60px 0; }
         .table-section {
-            background: rgba(255,255,255,0.02);
+            background: #0d0d15;
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 16px;
             overflow: hidden;
@@ -74,8 +74,9 @@
             vertical-align: middle;
             color: #ccc;
             font-size: 0.9rem;
+            background: #0d0d15;
         }
-        .table tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .table tbody tr:hover td { background: rgba(240,192,64,0.03); }
         .badge-pending {
             background: rgba(240,192,64,0.1);
             border: 1px solid rgba(240,192,64,0.2);
@@ -115,7 +116,7 @@
             margin-bottom: 20px;
             font-size: 0.9rem;
         }
-        .empty-row td { text-align: center; padding: 60px 20px !important; color: #333; }
+        .empty-row td { text-align: center; padding: 60px 20px !important; color: #333; background: #0d0d15 !important; }
         .footer {
             background: #060609;
             border-top: 1px solid rgba(255,255,255,0.04);
